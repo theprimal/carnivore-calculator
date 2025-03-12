@@ -53,6 +53,7 @@ function passCalculateTDEE() {
       weight
     );
     document.getElementById("results").style.display = "block";
+    window.GlobalBMI = BMI;
   } else {
     document.getElementById("answer").innerHTML =
       "Enter height, weight and age.";

@@ -92,3 +92,7 @@ body {
   padding-right: 10px;
   padding-top: 3px;
 }
+
+.chart {
+  width: 90%;
+}
