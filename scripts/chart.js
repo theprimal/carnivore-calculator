@@ -13,7 +13,7 @@ updateChart = (BMI) => {
 var myConfig = {
   type: "gauge",
   globals: {
-    fontSize: 20,
+    fontSize: 15,
   },
   plotarea: {
     marginTop: 50,
@@ -57,7 +57,7 @@ var myConfig = {
   scaleR: {
     aperture: 180,
     minValue: 10,
-    maxValue: 55,
+    maxValue: 50,
     step: 5,
     center: {
       visible: false,
