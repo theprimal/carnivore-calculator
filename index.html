@@ -171,79 +171,127 @@
       should not be taken as medical advice. Consult with a qualified healthcare
       professional before making any significant lifestyle changes.
     </p>
-    <label for="gender">Gender:</label>
-    <select name="gender" id="gender">
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-    Age (years): <input type="text" id="age" /> <br /><br />
-    Weight: <input type="text" id="weight" size="3" maxlength="3" />
-    <span class="weightLbsDiv" id="weightLbsDiv" style="display: inline"
-      >lbs</span
-    >
-    <span class="weightKgDiv" id="weightKgDiv" style="display: none">kg</span>
-    <br /><br />
-    <label class="switch">
-      <input type="checkbox" id="weightUnit" />
-      <div class="slider round" onclick="switchWeightUnits()">
-        <!--ADDED HTML -->
-        <span class="on">kg</span>
-        <span class="off">lbs</span>
-        <!--END-->
+    <div class="col-md-6">
+      <label class="form-label" for="gender">Gender:</label>
+      <select class="form-select w-50" name="gender" id="gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option></select
+      ><br />
+      <label class="form-label">Age (years):</label>
+      <input class="form-control w-25" type="text" id="age" /> <br />
+      <div>
+        <label class="form-label">Weight:</label>
+        <div class="input-group w-25">
+          <input
+            class="form-control"
+            type="text"
+            id="weight"
+            size="3"
+            maxlength="3"
+          />
+          <span
+            class="input-group-text"
+            id="weightLbsDiv"
+            style="display: inline"
+            >lbs</span
+          >
+          <span class="input-group-text" id="weightKgDiv" style="display: none"
+            >kg</span
+          >
+        </div>
+        <br />
+        <label class="switch">
+          <input type="checkbox" id="weightUnit" />
+          <div class="slider round" onclick="switchWeightUnits()">
+            <!--ADDED HTML -->
+            <span class="on">kg</span>
+            <span class="off">lbs</span>
+            <!--END-->
+          </div>
+        </label>
       </div>
-    </label>
-
-    <br /><br />
-    Height:
-    <div class="heightCmDiv" id="heightCmDiv" style="display: none">
-      <input type="text" id="heightcm" size="3" maxlength="3" /> cm
-    </div>
-    <div class="heightftDiv" id="heightftDiv">
-      <input type="number" id="heightft" size="1" maxlength="1" /> ft
-      <input type="number" id="heightin" size="2" maxlength="2" /> in
-    </div>
-    <br />
-    <label class="switch">
-      <input type="checkbox" id="heightUnit" />
-      <div
-        class="slider round"
-        id="heightUnitDiv"
-        onclick="switchHeightUnits()"
-        margin-top:20px
-      >
-        <!--ADDED HTML -->
-        <span class="on">cm</span>
-        <span class="off">ft/in</span>
-        <!--END-->
+      <br />
+      <div>
+        Height:
+        <div class="input-group w-25" id="heightCmDiv" style="display: none">
+          <input
+            class="form-control"
+            type="text"
+            id="heightcm"
+            size="3"
+            maxlength="3"
+          />
+          <span
+            class="input-group-text"
+            id="weightLbsDiv"
+            style="display: inline"
+            >cm</span
+          >
+        </div>
       </div>
-    </label>
-    <br /><br />
-    <label>Physical Activity Level:</label>
-    <br /><br />
-
-    <form>
-      <select id="PAL">
-        <option value="1.2">Sedentary / no exercise</option>
-        <option value="1.375">Light exercise or sport 1-3 days/week</option>
-        <option value="1.55">
-          Moderately active, exercise or sport 3-5 days/week
-        </option>
-        <option value="1.725">
-          Very active, hard exercise or sport 6-7 days/week
-        </option>
-        <option value="1.9">
-          Extremely active/heavily physical job/training twice per day
-        </option>
-      </select>
-    </form>
-    <br /><br />
+      <div class="input-group w-50" id="heightftDiv">
+        <input
+          type="number"
+          class="form-control"
+          id="heightft"
+          size="1"
+          maxlength="1"
+        />
+        <span class="input-group-text" id="weightLbsDiv" style="display: inline"
+          >ft</span
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="heightin"
+          size="2"
+          maxlength="2"
+        />
+        <span class="input-group-text" id="weightLbsDiv" style="display: inline"
+          >in</span
+        >
+      </div>
+      <br />
+      <label class="switch">
+        <input type="checkbox" id="heightUnit" />
+        <div
+          class="slider round"
+          id="heightUnitDiv"
+          onclick="switchHeightUnits()"
+          margin-top:20px
+        >
+          <!--ADDED HTML -->
+          <span class="on">cm</span>
+          <span class="off">ft/in</span>
+          <!--END-->
+        </div>
+      </label>
+      <br />
+      <br />
+      <label>Physical Activity Level:</label>
+      <form>
+        <select class="form-select w-50" id="PAL">
+          <option value="1.2">Sedentary / no exercise</option>
+          <option value="1.375">Light exercise or sport 1-3 days/week</option>
+          <option value="1.55">
+            Moderately active, exercise or sport 3-5 days/week
+          </option>
+          <option value="1.725">
+            Very active, hard exercise or sport 6-7 days/week
+          </option>
+          <option value="1.9">
+            Extremely active/heavily physical job/training twice per day
+          </option>
+        </select>
+      </form>
+    </div>
 
     <h2 id="answer"></h2>
-    <br /><br />
+    <br />
     <div id="guidance"></div>
-    <br /><br />
+    <br />
     <button onclick="passCalculateTDEE()">Calculate</button>
-    <br /><br />
+    <br />
     <script>
       // pull variables
       // https://www.w3schools.com/howto/howto_css_switch.asp - toggle switch
@@ -327,13 +375,13 @@
 
         if (ft.style.display === "none") {
           //hide
-          ft.style.display = "block";
+          ft.style.display = "flex";
           cm.style.display = "none";
           heightUnits = "ft";
           console.log("current units: ", heightUnits);
         } else {
           ft.style.display = "none";
-          cm.style.display = "block";
+          cm.style.display = "flex";
           heightUnits = "cm";
 
           console.log("current units: ", heightUnits);
