@@ -5,410 +5,264 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TDEE Calculator</title>
-    <script type="text/javascript" src="tdeecalc.js"></script>
-    <script type="text/javascript" src="guidance_nocals.js"></script>
+    <script type="text/javascript" src="scripts/tdeecalc.js"></script>
+    <script type="text/javascript" src="scripts/guidance_nocals.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <style>
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 90px;
-        height: 36px;
-      }
-
-      .switch input {
-        display: none;
-      }
-
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #3183ff;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-
-      input:checked + .slider {
-        background-color: #2ab934;
-      }
-
-      input:focus + .slider {
-        box-shadow: 0 0 1px #2196f3;
-      }
-
-      input:checked + .slider:before {
-        -webkit-transform: translateX(55px);
-        -ms-transform: translateX(55px);
-        transform: translateX(55px);
-      }
-
-      /*------ ADDED CSS ---------*/
-      .on {
-        display: none;
-      }
-
-      .on,
-      .off {
-        color: white;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        font-size: 12px;
-        font-family: Verdana, sans-serif;
-      }
-
-      input:checked + .slider .on {
-        display: block;
-      }
-
-      input:checked + .slider .off {
-        display: none;
-      }
-
-      /*--------- END --------*/
-
-      /* Rounded sliders */
-      .slider.round {
-        border-radius: 34px;
-      }
-
-      .slider.round:before {
-        border-radius: 50%;
-      }
-      .heightCmDiv {
-        margin-top: 2px;
-      }
-      canvas {
-        border: 1px solid red;
-      }
-      body {
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 3px;
-      }
-    </style>
+    <link href="style.css" rel="stylesheet" crossorigin="anonymous" />
   </head>
   <body onload="initialise()">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">All Tools</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="https://www.theprimal.com/carnivore-diet-macro-calculator"
-                >Primal Carnivore Calculator</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="https://app.gocarnivore.com/tools/carnivore-diet-macro-calculator"
-                >GoCarnivore Macro Calculator</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="https://app.gocarnivore.com/tools/meal-planner"
-                >Carnivore Meal Planner</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <h1>The Carnivore Calorie Calculator</h1>
-    <p>
-      This calorie calculator estimates your daily caloric needs based on
-      factors such as age, gender, weight, height, and physical activity level.
-      It utilizes the Mifflin-St Jeor equation, a widely recognized method for
-      calculating Basal Metabolic Rate (BMR), which represents the number of
-      calories your body requires at rest to maintain vital functions.
-    </p>
-    <h2>Are you eating enough on carnivore?</h2>
-    <p>
-      Eating enough protein and fat on a carnivore diet is essential. Protein
-      helps build and repair muscles, while fat provides energy. Using a calorie
-      calculator can help you ensure you're getting the right amounts of each.
-    </p>
-    <p>
-      <b>Disclaimer:</b> The results from this tool provide a general guide and
-      should not be taken as medical advice. Consult with a qualified healthcare
-      professional before making any significant lifestyle changes.
-    </p>
-    <div class="col-md-6">
-      <label class="form-label" for="gender">Gender:</label>
-      <select class="form-select w-50" name="gender" id="gender">
-        <option value="Male">Male</option>
-        <option value="Female">Female</option></select
-      ><br />
-      <label class="form-label">Age (years):</label>
-      <input class="form-control w-25" type="text" id="age" /> <br />
-      <div>
-        <label class="form-label">Weight:</label>
-        <div class="input-group w-25">
-          <input
-            class="form-control"
-            type="text"
-            id="weight"
-            size="3"
-            maxlength="3"
-          />
-          <span
-            class="input-group-text"
-            id="weightLbsDiv"
-            style="display: inline"
-            >lbs</span
+    <div class="container">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Carnivore Guide</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-          <span class="input-group-text" id="weightKgDiv" style="display: none"
-            >kg</span
-          >
-        </div>
-        <br />
-        <label class="switch">
-          <input type="checkbox" id="weightUnit" />
-          <div class="slider round" onclick="switchWeightUnits()">
-            <!--ADDED HTML -->
-            <span class="on">kg</span>
-            <span class="off">lbs</span>
-            <!--END-->
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Calculators
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/">Carnivore Calculator</a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="https://www.theprimal.com/carnivore-diet-macro-calculator"
+                      >Primal Calculator</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="https://app.gocarnivore.com/tools/carnivore-diet-macro-calculator"
+                      >GoCarnivore Calculator</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="https://app.gocarnivore.com/tools/sugar-calculator"
+                      >Sugar Calculator</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="https://app.gocarnivore.com/tools/meal-planner"
+                  >Meal Planner</a
+                >
+              </li>
+            </ul>
           </div>
-        </label>
+        </div>
+      </nav>
+      <h1>The Carnivore Calorie Calculator</h1>
+      <p>
+        This calorie calculator estimates your daily caloric needs based on
+        factors such as
+        <b>age, gender, weight, height, and physical activity level</b>.
+      </p>
+      <p>
+        It utilizes the Mifflin-St Jeor equation, a widely recognized method for
+        calculating Basal Metabolic Rate (BMR), which represents the number of
+        calories your body requires at rest to maintain vital functions.
+      </p>
+
+      <div class="alert alert-warning" role="alert">
+        <b>Disclaimer:</b> The results from this tool provide a general guide
+        and should not be taken as medical advice. Consult with a
+        <a href="https://app.gocarnivore.com/doctors" target="_blank"
+          >qualified healthcare professional</a
+        >
+        before making any significant lifestyle changes.
       </div>
-      <br />
-      <div>
-        Height:
-        <div class="input-group w-25" id="heightCmDiv" style="display: none">
-          <input
-            class="form-control"
-            type="text"
-            id="heightcm"
-            size="3"
-            maxlength="3"
-          />
-          <span
-            class="input-group-text"
-            id="weightLbsDiv"
-            style="display: inline"
-            >cm</span
-          >
+      <div class="container mb-5">
+        <div class="row gy-4">
+          <div class="col-md-6">
+            <div class="mb-4">
+              <label class="form-label" for="gender">Gender:</label>
+              <select class="form-select" name="gender" id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Age (years):</label>
+              <input class="form-control" type="text" id="age" />
+            </div>
+
+            <div class="mb-4">
+              <div class="d-flex w-100 flex-row justify-content-between">
+                <label class="form-label">Weight:</label>
+                <label class="switch">
+                  <input type="checkbox" id="weightUnit" />
+                  <div class="slider round" onclick="switchWeightUnits()">
+                    <span class="on">kg</span>
+                    <span class="off">lbs</span>
+                  </div>
+                </label>
+              </div>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="text"
+                  id="weight"
+                  size="3"
+                  maxlength="3"
+                />
+                <span class="input-group-text">
+                  <span id="weightLbsDiv" style="display: inline">lbs</span>
+                  <span id="weightKgDiv" style="display: none">kg</span></span
+                >
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="d-flex w-100 flex-row justify-content-between">
+                <label class="form-label">Height:</label>
+                <label class="switch">
+                  <input type="checkbox" id="heightUnit" />
+                  <div
+                    class="slider round"
+                    id="heightUnitDiv"
+                    onclick="switchHeightUnits()"
+                    margin-top:20px
+                  >
+                    <!--ADDED HTML -->
+                    <span class="on">cm</span>
+                    <span class="off">ft/in</span>
+                    <!--END-->
+                  </div>
+                </label>
+              </div>
+              <div class="input-group">
+                <div class="input-group" id="heightCmDiv" style="display: none">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="heightcm"
+                    size="3"
+                    maxlength="3"
+                  />
+                  <span
+                    class="input-group-text"
+                    id="weightLbsDiv"
+                    style="display: inline"
+                    >cm</span
+                  >
+                </div>
+                <div class="input-group" id="heightftDiv">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="heightft"
+                    size="1"
+                    maxlength="1"
+                  />
+                  <span
+                    class="input-group-text"
+                    id="weightLbsDiv"
+                    style="display: inline"
+                    >ft</span
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="heightin"
+                    size="2"
+                    maxlength="2"
+                  />
+                  <span
+                    class="input-group-text"
+                    id="weightLbsDiv"
+                    style="display: inline"
+                    >in</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Physical Activity Level:</label>
+              <form>
+                <select class="form-select" id="PAL">
+                  <option value="1.2">Sedentary / no exercise</option>
+                  <option value="1.375">
+                    Light exercise or sport 1-3 days/week
+                  </option>
+                  <option value="1.55">
+                    Moderately active, exercise or sport 3-5 days/week
+                  </option>
+                  <option value="1.725">
+                    Very active, hard exercise or sport 6-7 days/week
+                  </option>
+                  <option value="1.9">
+                    Extremely active/heavily physical job/training twice per day
+                  </option>
+                </select>
+              </form>
+            </div>
+
+            <div
+              id="results"
+              class="alert alert-primary"
+              style="display: none"
+              role="alert"
+            >
+              <h2 id="answer"></h2>
+              <div id="guidance"></div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-dark w-100"
+              onclick="passCalculateTDEE()"
+            >
+              Calculate Carnivore Macros
+            </button>
+          </div>
+          <div class="col">
+            <div class="alert alert-light">
+              <h2>Are you eating enough on carnivore?</h2>
+              <p>
+                Eating enough protein and fat on a carnivore diet is essential.
+                Protein helps build and repair muscles, while fat provides
+                energy. Using a calorie calculator can help you ensure you're
+                getting the right amounts of each.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="input-group w-50" id="heightftDiv">
-        <input
-          type="number"
-          class="form-control"
-          id="heightft"
-          size="1"
-          maxlength="1"
-        />
-        <span class="input-group-text" id="weightLbsDiv" style="display: inline"
-          >ft</span
-        >
-        <input
-          type="number"
-          class="form-control"
-          id="heightin"
-          size="2"
-          maxlength="2"
-        />
-        <span class="input-group-text" id="weightLbsDiv" style="display: inline"
-          >in</span
-        >
-      </div>
-      <br />
-      <label class="switch">
-        <input type="checkbox" id="heightUnit" />
-        <div
-          class="slider round"
-          id="heightUnitDiv"
-          onclick="switchHeightUnits()"
-          margin-top:20px
-        >
-          <!--ADDED HTML -->
-          <span class="on">cm</span>
-          <span class="off">ft/in</span>
-          <!--END-->
-        </div>
-      </label>
-      <br />
-      <br />
-      <label>Physical Activity Level:</label>
-      <form>
-        <select class="form-select w-50" id="PAL">
-          <option value="1.2">Sedentary / no exercise</option>
-          <option value="1.375">Light exercise or sport 1-3 days/week</option>
-          <option value="1.55">
-            Moderately active, exercise or sport 3-5 days/week
-          </option>
-          <option value="1.725">
-            Very active, hard exercise or sport 6-7 days/week
-          </option>
-          <option value="1.9">
-            Extremely active/heavily physical job/training twice per day
-          </option>
-        </select>
-      </form>
     </div>
-
-    <h2 id="answer"></h2>
-    <br />
-    <div id="guidance"></div>
-    <br />
-    <button onclick="passCalculateTDEE()">Calculate</button>
-    <br />
-    <script>
-      // pull variables
-      // https://www.w3schools.com/howto/howto_css_switch.asp - toggle switch
-      // To do: figure out the precision faff(?) affecting the difference in numbers from
-      // the spreadsheet. Could also be equation faff.
-
-      // Add in metric/imperial sliders for conversion
-      // Add in report and suggestion
-      // Add in field for current estimated caloric intake
-      // Add in deficit/surplus calculation
-      // ?? add in options for fasting and a modifier
-
-      var heightUnits;
-      var weightUnits;
-
-      function initialise() {
-        initialiseVars();
-        //initialiseGauge();
-      }
-
-      function initialiseVars() {
-        heightUnits = "ft";
-        weightUnits = "lbs";
-      }
-
-      function passCalculateTDEE() {
-        var gender = document.getElementById("gender").value;
-        var age = Number(document.getElementById("age").value);
-        var weight = Number(document.getElementById("weight").value);
-        var heightcm = Number(document.getElementById("heightcm").value);
-        var heightft = Number(document.getElementById("heightft").value);
-        var heightin = Number(document.getElementById("heightin").value);
-        var PAL = document.getElementById("PAL").value;
-
-        var height;
-
-        //Convert units to cm/kgs for calculations
-        if (heightUnits == "ft") {
-          height = (heightft * 12 + heightin) * 2.54;
-          console.log("calculated height: ", height);
-          console.log("ft: ", heightft, "in: ", heightin);
-          console.log(heightft * 12, heightin);
-        } else {
-          height = heightcm;
-        }
-        if (weightUnits == "lbs") {
-          weight = weight * 0.453592;
-          console.log("calculated weight: ", weight);
-        }
-
-        var BMI = calculateBMI(weight, height); //BMI after weight/height normalised
-
-        console.log(gender, age, weight, height, PAL);
-        if (age != "" && weight != "" && height != "") {
-          var output = calculateTDEE(gender, age, weight, height, PAL, true);
-          document.getElementById("answer").innerHTML =
-            "Baseline calorie goal (TDEE, Total Daily Energy Expenditure): " +
-            output +
-            "<br> Body Mass Index (BMI): " +
-            BMI;
-          document.getElementById("guidance").innerHTML = returnGuidanceNoCals(
-            BMI,
-            output,
-            height,
-            weight
-          );
-          //initialiseCalorieGauge(output);
-        } else {
-          document.getElementById("answer").innerHTML =
-            "Enter height, weight and age.";
-        }
-        console.log(output);
-      }
-
-      function switchHeightUnits() {
-        console.log("clicked");
-        var cm = document.getElementById("heightCmDiv"); //DUH REMEMBER QUOTES
-        var ft = document.getElementById("heightftDiv");
-
-        console.log("pre conditional unit is", heightUnits);
-
-        if (ft.style.display === "none") {
-          //hide
-          ft.style.display = "flex";
-          cm.style.display = "none";
-          heightUnits = "ft";
-          console.log("current units: ", heightUnits);
-        } else {
-          ft.style.display = "none";
-          cm.style.display = "flex";
-          heightUnits = "cm";
-
-          console.log("current units: ", heightUnits);
-        }
-      }
-
-      function switchWeightUnits() {
-        var lbs = document.getElementById("weightLbsDiv");
-        var kgs = document.getElementById("weightKgDiv");
-
-        if (lbs.style.display === "none") {
-          lbs.style.display = "inline";
-          kgs.style.display = "none";
-          weightUnits = "lbs";
-          console.log(weightUnits);
-          console.log(lbs.style.display);
-          console.log(kgs.style.display);
-        } else {
-          lbs.style.display = "none";
-          kgs.style.display = "inline";
-          weightUnits = "kgs";
-          console.log(weightUnits);
-          console.log(lbs.style.display);
-          console.log(kgs.style.display);
-        }
-      }
-    </script>
+    <script type="text/javascript" src="scripts/calculate.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
