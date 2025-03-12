@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TDEE Calculator</title>
     <script type="text/javascript" src="tdeecalc.js"></script>
     <script type="text/javascript" src="guidance_nocals.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"></link>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <style>
-        .switch {
+      .switch {
         position: relative;
         display: inline-block;
         width: 90px;
         height: 36px;
-        }
+      }
 
-        .switch input {display:none;}
+      .switch input {
+        display: none;
+      }
 
-        .slider {
+      .slider {
         position: absolute;
         cursor: pointer;
         top: 0;
@@ -26,11 +33,11 @@
         right: 0;
         bottom: 0;
         background-color: #3183ff;
-        -webkit-transition: .4s;
-        transition: .4s;
-        }
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
 
-        .slider:before {
+      .slider:before {
         position: absolute;
         content: "";
         height: 26px;
@@ -38,162 +45,231 @@
         left: 4px;
         bottom: 4px;
         background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-        }
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
 
-        input:checked + .slider {
+      input:checked + .slider {
         background-color: #2ab934;
-        }
+      }
 
-        input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
-        }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196f3;
+      }
 
-        input:checked + .slider:before {
+      input:checked + .slider:before {
         -webkit-transform: translateX(55px);
         -ms-transform: translateX(55px);
         transform: translateX(55px);
-        }
+      }
 
-        /*------ ADDED CSS ---------*/
-        .on
-        {
+      /*------ ADDED CSS ---------*/
+      .on {
         display: none;
-        }
+      }
 
-        .on, .off
-        {
+      .on,
+      .off {
         color: white;
         position: absolute;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         top: 50%;
         left: 50%;
         font-size: 12px;
         font-family: Verdana, sans-serif;
-        }
+      }
 
-        input:checked+ .slider .on
-        {display: block;}
+      input:checked + .slider .on {
+        display: block;
+      }
 
-        input:checked + .slider .off
-        {display: none;}
+      input:checked + .slider .off {
+        display: none;
+      }
 
-        /*--------- END --------*/
+      /*--------- END --------*/
 
-        /* Rounded sliders */
-        .slider.round {
+      /* Rounded sliders */
+      .slider.round {
         border-radius: 34px;
-        }
+      }
 
-        .slider.round:before {
-        border-radius: 50%;}
-        .heightCmDiv{
-            margin-top:2px;
-        }
-        canvas {
-            border:1px solid red;
-        }
-        body {
-            padding-left:10px;
-            padding-right:10px;
-            padding-top:3px;
-        }
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      .heightCmDiv {
+        margin-top: 2px;
+      }
+      canvas {
+        border: 1px solid red;
+      }
+      body {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 3px;
+      }
     </style>
-</head>
-<body onload="initialise()">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a href="https://www.theprimal.com/carnivore-diet-macro-calculator">The Primal Carnivore Calculator</a>
-        <a href="https://app.gocarnivore.com/tools/carnivore-diet-macro-calculator">GoCarnivore Carnivore Diet Macro Calculator</a>
-        <a href="https://app.gocarnivore.com/tools/meal-planner">Carnivore Meal Planner</a>
+  </head>
+  <body onload="initialise()">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">All Tools</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.theprimal.com/carnivore-diet-macro-calculator"
+                >Primal Carnivore Calculator</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://app.gocarnivore.com/tools/carnivore-diet-macro-calculator"
+                >GoCarnivore Macro Calculator</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://app.gocarnivore.com/tools/meal-planner"
+                >Carnivore Meal Planner</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
     <h1>The Carnivore Calorie Calculator</h1>
-    <p>This calorie calculator estimates your daily caloric needs based on factors such as age, gender, weight, height, and physical activity level. It utilizes the Mifflin-St Jeor equation, a widely recognized method for calculating Basal Metabolic Rate (BMR), which represents the number of calories your body requires at rest to maintain vital functions.</p>
+    <p>
+      This calorie calculator estimates your daily caloric needs based on
+      factors such as age, gender, weight, height, and physical activity level.
+      It utilizes the Mifflin-St Jeor equation, a widely recognized method for
+      calculating Basal Metabolic Rate (BMR), which represents the number of
+      calories your body requires at rest to maintain vital functions.
+    </p>
     <h2>Are you eating enough on carnivore?</h2>
-    <p>Eating enough protein and fat on a carnivore diet is essential. Protein helps build and repair muscles, while fat provides energy. Using a calorie calculator can help you ensure you're getting the right amounts of each.</p>
-    <p><b>Disclaimer:</b> The results from this tool provide a general guide and should not be taken as medical advice. Consult with a qualified healthcare professional before making any significant lifestyle changes.</p>
+    <p>
+      Eating enough protein and fat on a carnivore diet is essential. Protein
+      helps build and repair muscles, while fat provides energy. Using a calorie
+      calculator can help you ensure you're getting the right amounts of each.
+    </p>
+    <p>
+      <b>Disclaimer:</b> The results from this tool provide a general guide and
+      should not be taken as medical advice. Consult with a qualified healthcare
+      professional before making any significant lifestyle changes.
+    </p>
     <label for="gender">Gender:</label>
     <select name="gender" id="gender">
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
     </select>
-    Age (years): <input type = "text" id="age">
-    <br><br>
-    Weight: <input type = "text" id="weight" size="3" maxlength="3">
-    <span class="weightLbsDiv" id="weightLbsDiv" style="display:inline">lbs</span>
-    <span class="weightKgDiv" id="weightKgDiv" style="display:none">kg</span>
-    <br><br>
+    Age (years): <input type="text" id="age" /> <br /><br />
+    Weight: <input type="text" id="weight" size="3" maxlength="3" />
+    <span class="weightLbsDiv" id="weightLbsDiv" style="display: inline"
+      >lbs</span
+    >
+    <span class="weightKgDiv" id="weightKgDiv" style="display: none">kg</span>
+    <br /><br />
     <label class="switch">
-        <input type="checkbox" id="weightUnit">
-        <div class="slider round" onclick="switchWeightUnits()">
-         <!--ADDED HTML -->
-         <span class="on">kg</span>
-         <span class="off">lbs</span>
-         <!--END-->
-        </div>
+      <input type="checkbox" id="weightUnit" />
+      <div class="slider round" onclick="switchWeightUnits()">
+        <!--ADDED HTML -->
+        <span class="on">kg</span>
+        <span class="off">lbs</span>
+        <!--END-->
+      </div>
     </label>
 
-    <br><br>
-    Height: <div class="heightCmDiv" id="heightCmDiv" style="display:none"> <input type = "text" id = "heightcm" size="3" maxlength="3"> cm</div>
-    <div class = "heightftDiv" id="heightftDiv"><input type = "number" id = "heightft" size="1" maxlength="1"> ft <input type ="number" id="heightin" size="2" maxlength="2"> in</div>
-    <br>
+    <br /><br />
+    Height:
+    <div class="heightCmDiv" id="heightCmDiv" style="display: none">
+      <input type="text" id="heightcm" size="3" maxlength="3" /> cm
+    </div>
+    <div class="heightftDiv" id="heightftDiv">
+      <input type="number" id="heightft" size="1" maxlength="1" /> ft
+      <input type="number" id="heightin" size="2" maxlength="2" /> in
+    </div>
+    <br />
     <label class="switch">
-        <input type="checkbox" id="heightUnit">
-        <div class="slider round" id="heightUnitDiv"  onclick="switchHeightUnits()" margin-top:20px>
-         <!--ADDED HTML -->
-         <span class="on">cm</span>
-         <span class="off">ft/in</span>
-         <!--END-->
-        </div>
+      <input type="checkbox" id="heightUnit" />
+      <div
+        class="slider round"
+        id="heightUnitDiv"
+        onclick="switchHeightUnits()"
+        margin-top:20px
+      >
+        <!--ADDED HTML -->
+        <span class="on">cm</span>
+        <span class="off">ft/in</span>
+        <!--END-->
+      </div>
     </label>
-    <br><br>
+    <br /><br />
     <label>Physical Activity Level:</label>
-    <br><br>
+    <br /><br />
 
     <form>
-    <select id="PAL">
-        <option value = "1.2">Sedentary / no exercise</option>
-        <option value = "1.375">Light exercise or sport 1-3 days/week</option>
-        <option value = "1.55">Moderately active, exercise or sport 3-5 days/week</option>
-        <option value = "1.725">Very active, hard exercise or sport 6-7 days/week</option>
-        <option value = "1.9">Extremely active/heavily physical job/training twice per day</option>
-    </select>
-</form>
-    <br><br>
+      <select id="PAL">
+        <option value="1.2">Sedentary / no exercise</option>
+        <option value="1.375">Light exercise or sport 1-3 days/week</option>
+        <option value="1.55">
+          Moderately active, exercise or sport 3-5 days/week
+        </option>
+        <option value="1.725">
+          Very active, hard exercise or sport 6-7 days/week
+        </option>
+        <option value="1.9">
+          Extremely active/heavily physical job/training twice per day
+        </option>
+      </select>
+    </form>
+    <br /><br />
 
     <h2 id="answer"></h2>
-    <br><br>
+    <br /><br />
     <div id="guidance"></div>
-    <br><br>
+    <br /><br />
     <button onclick="passCalculateTDEE()">Calculate</button>
-    <br><br>
-<script>
-    // pull variables
-    // https://www.w3schools.com/howto/howto_css_switch.asp - toggle switch
-    // To do: figure out the precision faff(?) affecting the difference in numbers from
-    // the spreadsheet. Could also be equation faff.
+    <br /><br />
+    <script>
+      // pull variables
+      // https://www.w3schools.com/howto/howto_css_switch.asp - toggle switch
+      // To do: figure out the precision faff(?) affecting the difference in numbers from
+      // the spreadsheet. Could also be equation faff.
 
-    // Add in metric/imperial sliders for conversion
-    // Add in report and suggestion
-    // Add in field for current estimated caloric intake
-    // Add in deficit/surplus calculation
-    // ?? add in options for fasting and a modifier
+      // Add in metric/imperial sliders for conversion
+      // Add in report and suggestion
+      // Add in field for current estimated caloric intake
+      // Add in deficit/surplus calculation
+      // ?? add in options for fasting and a modifier
 
-    var heightUnits;
-    var weightUnits;
+      var heightUnits;
+      var weightUnits;
 
-
-    function initialise() {
+      function initialise() {
         initialiseVars();
         //initialiseGauge();
-    }
+      }
 
-    function initialiseVars() {
+      function initialiseVars() {
         heightUnits = "ft";
         weightUnits = "lbs";
-    }
+      }
 
-    function passCalculateTDEE() {
+      function passCalculateTDEE() {
         var gender = document.getElementById("gender").value;
         var age = Number(document.getElementById("age").value);
         var weight = Number(document.getElementById("weight").value);
@@ -206,35 +282,43 @@
 
         //Convert units to cm/kgs for calculations
         if (heightUnits == "ft") {
-            height = ((heightft*12) + heightin) * 2.54;
-            console.log("calculated height: ", height);
-            console.log("ft: ",heightft,"in: ",heightin);
-            console.log(heightft*12,heightin)
+          height = (heightft * 12 + heightin) * 2.54;
+          console.log("calculated height: ", height);
+          console.log("ft: ", heightft, "in: ", heightin);
+          console.log(heightft * 12, heightin);
         } else {
-            height = heightcm;
+          height = heightcm;
         }
         if (weightUnits == "lbs") {
-            weight = weight * 0.453592;
-            console.log("calculated weight: ", weight)
+          weight = weight * 0.453592;
+          console.log("calculated weight: ", weight);
         }
 
-        var BMI = calculateBMI(weight,height); //BMI after weight/height normalised
+        var BMI = calculateBMI(weight, height); //BMI after weight/height normalised
 
-        console.log(gender, age, weight, height, PAL)
+        console.log(gender, age, weight, height, PAL);
         if (age != "" && weight != "" && height != "") {
-
-            var output = calculateTDEE(gender,age,weight,height,PAL,true);
-            document.getElementById("answer").innerHTML = "Baseline calorie goal (TDEE, Total Daily Energy Expenditure): "+output + "<br> Body Mass Index (BMI): "+BMI;
-            document.getElementById("guidance").innerHTML = returnGuidanceNoCals(BMI, output, height, weight);
-            //initialiseCalorieGauge(output);
+          var output = calculateTDEE(gender, age, weight, height, PAL, true);
+          document.getElementById("answer").innerHTML =
+            "Baseline calorie goal (TDEE, Total Daily Energy Expenditure): " +
+            output +
+            "<br> Body Mass Index (BMI): " +
+            BMI;
+          document.getElementById("guidance").innerHTML = returnGuidanceNoCals(
+            BMI,
+            output,
+            height,
+            weight
+          );
+          //initialiseCalorieGauge(output);
         } else {
-            document.getElementById("answer").innerHTML = "Enter height, weight and age.";
+          document.getElementById("answer").innerHTML =
+            "Enter height, weight and age.";
         }
         console.log(output);
+      }
 
-    }
-
-    function switchHeightUnits() {
+      function switchHeightUnits() {
         console.log("clicked");
         var cm = document.getElementById("heightCmDiv"); //DUH REMEMBER QUOTES
         var ft = document.getElementById("heightftDiv");
@@ -242,44 +326,45 @@
         console.log("pre conditional unit is", heightUnits);
 
         if (ft.style.display === "none") {
-            //hide
-            ft.style.display = "block";
-            cm.style.display = "none";
-            heightUnits = "ft";
-            console.log("current units: ", heightUnits);
+          //hide
+          ft.style.display = "block";
+          cm.style.display = "none";
+          heightUnits = "ft";
+          console.log("current units: ", heightUnits);
         } else {
-            ft.style.display = "none";
-            cm.style.display = "block";
-            heightUnits = "cm";
+          ft.style.display = "none";
+          cm.style.display = "block";
+          heightUnits = "cm";
 
-            console.log("current units: ", heightUnits);
+          console.log("current units: ", heightUnits);
         }
+      }
 
-    }
-
-    function switchWeightUnits() {
+      function switchWeightUnits() {
         var lbs = document.getElementById("weightLbsDiv");
         var kgs = document.getElementById("weightKgDiv");
 
         if (lbs.style.display === "none") {
-            lbs.style.display = "inline";
-            kgs.style.display = "none";
-            weightUnits = "lbs";
-            console.log(weightUnits);
-            console.log(lbs.style.display);
-            console.log(kgs.style.display);
+          lbs.style.display = "inline";
+          kgs.style.display = "none";
+          weightUnits = "lbs";
+          console.log(weightUnits);
+          console.log(lbs.style.display);
+          console.log(kgs.style.display);
         } else {
-            lbs.style.display = "none";
-            kgs.style.display = "inline";
-            weightUnits = "kgs";
-            console.log(weightUnits)
-            console.log(lbs.style.display);
-            console.log(kgs.style.display);
+          lbs.style.display = "none";
+          kgs.style.display = "inline";
+          weightUnits = "kgs";
+          console.log(weightUnits);
+          console.log(lbs.style.display);
+          console.log(kgs.style.display);
         }
-    }
-
-</script>
-
-
-</body>
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
