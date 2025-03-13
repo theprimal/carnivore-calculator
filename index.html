@@ -286,7 +286,55 @@
         </div>
       </div>
     </div>
+
+    <div class="container mb-5">
+      <h1 class="my-4">Carnivore Meal Planner</h1>
+      <p>
+        This free Carnivore Meal Planner helps you stick to a carnivore diet,
+        focusing on animal-based foods. Enter your daily calorie goal and
+        preferred units to get a personalized meal plan with meats and optional
+        butter or cheese sides. It's a simple way to support your carnivore
+        lifestyle.
+      </p>
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="calories" class="form-label"
+                  >Total Daily Calories</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="calories"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="unit" class="form-label">Measuring Unit</label>
+                <select class="form-select" id="unit" required>
+                  <option value="grams">Grams</option>
+                  <option value="ounces">Ounces</option>
+                </select>
+              </div>
+              <button
+                id="plan-meals"
+                type="submit"
+                class="btn btn-primary w-100"
+              >
+                Generate Meal Plan
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div id="mealPlan" class="alert alert-dark"></div>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript" src="scripts/calculate.js"></script>
+    <script type="text/javascript" src="scripts/mealplan.js"></script>
     <script type="text/javascript" src="scripts/chart.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

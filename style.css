@@ -96,3 +96,7 @@ body {
 .chart {
   width: 90%;
 }
+
+#mealPlan {
+  display: none;
+}
