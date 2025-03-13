@@ -2,8 +2,9 @@ document.getElementById("plan-meals").addEventListener("click", function (e) {
   const calories = parseInt(document.getElementById("calories").value);
   const unit = document.getElementById("unit").value;
 
-  const meals = generateMealPlan(calories, unit);
-  console.log(calories, unit);
+  const meals = Array.from({ length: 7 }, () =>
+    generateMealPlan(calories, unit)
+  );
   displayMealPlan(meals, unit);
 });
 
@@ -42,7 +43,7 @@ function generateMealPlan(calories, unit) {
   ];
 
   for (let i = 0; i < numMeals; i++) {
-    const meal = [];
+    let meal = {};
     const ingredient =
       ingredients[Math.floor(Math.random() * ingredients.length)];
     const quantityGrams = (caloriesPerMeal / ingredient.caloriesPer100g) * 100;
@@ -51,18 +52,17 @@ function generateMealPlan(calories, unit) {
     );
     if (ingredient.isUnitBased) {
       const quantityUnits = Math.ceil(quantityGrams / ingredient.averageWeight);
-      meal.push({
+      meal = {
         name: ingredient.name,
         quantity: quantity,
         units: quantityUnits,
-      });
+      };
     } else {
-      meal.push({ name: ingredient.name, quantity: quantity });
+      meal = { name: ingredient.name, quantity: quantity };
     }
     mealPlan.push(meal);
   }
 
-  console.log(mealPlan);
   return mealPlan;
 }
 
@@ -74,21 +74,29 @@ function displayMealPlan(meals, unit) {
   const mealPlanDiv = document.getElementById("mealPlan");
   mealPlanDiv.style.display = "block";
   mealPlanDiv.innerHTML = "";
+
   meals.forEach((meal, index) => {
-    const mealDiv = document.createElement("div");
-    mealDiv.classList.add("meal");
-    const mealTitle = document.createElement("h4");
-    mealTitle.innerText = `Meal ${index + 1}`;
-    mealDiv.appendChild(mealTitle);
+    const dayDiv = document.createElement("div");
+
+    const dayTitle = document.createElement("h3");
+    dayDiv.classList.add("mt-2");
+    dayDiv.innerText = `Day ${index + 1}`;
+    dayDiv.appendChild(dayTitle);
+
+    mealPlanDiv.appendChild(dayDiv);
     const mealList = document.createElement("ul");
+    mealList.classList.add("list-group");
     meal.forEach((item) => {
       const listItem = document.createElement("li");
+      listItem.classList.add("list-group-item");
       listItem.innerText = `${item.name}: ${
         item.units ? `(${item.units})` : ``
       } ${item.quantity} ${unit}`;
       mealList.appendChild(listItem);
     });
-    mealDiv.appendChild(mealList);
-    mealPlanDiv.appendChild(mealDiv);
+    dayDiv.appendChild(mealList);
   });
 }
+
+const meals = Array.from({ length: 7 }, () => generateMealPlan(2100, "grams"));
+displayMealPlan(meals, "grams");
